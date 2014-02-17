@@ -22,9 +22,10 @@ filterStream(file = "20140216_nbaallstar.json", locations = c(42.5,-88.5,43.5,-8
              track=c("NBA","AllStar","nba","allstar"),timeout = 14400, oauth = cred)
 dataPath <- "20140216_nbaallstar.json"
 
-## Idat
+## data.table is just data.frame but with better performance and shorter modification codes, I love it!
+## I was told that data.table is more effective but I have never tested it since it is so easy to do
 temp <- data.table(parseTweets(dataPath, simplify = FALSE, verbose = TRUE))
-tweets   <- temp[,c(2:8,10:42) := NULL]
+tweets <- temp[,c(2:8,10:42) := NULL]
 
 ## Modify time into R's time format
 tweets[,created_at := gsub("0000","",created_at)]
